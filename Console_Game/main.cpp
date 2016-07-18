@@ -12,36 +12,36 @@
 
 using namespace std; //Namespace of the System Libraries
 
-//User Libraries
+					 //User Libraries
 
 
 
-//Global Constants
+					 //Global Constants
 
 
 
-//Function Prototypes
-void MapDraw(int x, int y);
+					 //Function Prototypes
+void DrawMap(int x, int y);
 
-void AI();
+void AI();//Finish
 
-void GameLogic(int Turn);
+void GameLogic(short Turn, short x, short y);
 
-bool Chk_Spot(short x);
+string Chk_Spot(short x);
 
 // Execution Begins Here!
 int main(int argc, char** argv) {
 	//Declare variables
-	int x;
-	int y;
+	short x;
+	short y;
 
-	short Turn;  // Player 1's && Player2's Turn  
+	short Turn = 1;  // Player 1's && Player2's Turn  
 	short P_or_A;
 
 	//Input Data
-	cout << "Enter the Length for the map\\t MAX FOR 'L' AND 'W' IS 20! \n";
+	cout << "Enter the Length for the map\t\t MAX FOR 'L' AND 'W' IS 20! \n";
 	cin >> x;
-	cout << "Now Enter the Width for the Map"\n;
+	cout << "Now Enter the Width for the Map\n";
 	cin >> y;
 	cout << "Are You playing against someone or do you wish to play against an 'ai'";
 	cout << "\n\n \t Enter 1 For Playing another 'Player' \t Enter 2 For playing an 'AI'";
@@ -52,22 +52,22 @@ int main(int argc, char** argv) {
 
 	//Output
 	switch (Turn) {
-	case1: // Player 1's Turn
+	case 1: // Player 1's Turn
 		cout << "It's Player 1's Turn";
 
 
-		GameLogic(Turn);
+		GameLogic(Turn, x, y);
 		Turn += 1; // Go's To player 2's Turn 
 		break;
 
-	case2: // Player 2's Turn
+	case 2: // Player 2's Turn
 		cout << "It's Player 2's Turn";
 		switch (P_or_A)
 		{
 
 		case 1: // Player vs Player Logic    
 			cout << "It's Player 2's Turn";
-			GameLogic(Turn);
+			GameLogic(Turn, x, y);
 
 
 
@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
 		default:
 			cout << "You never entered a valid entry for which you wish to play";
 			cout << "'Player' or 'AI' \t";
-			cin >> P_or_A
+			cin >> P_or_A;
 
 		}
 
@@ -87,25 +87,28 @@ int main(int argc, char** argv) {
 	}
 
 
-	MapDraw(x, y); //Maps Length and Width
 
-
-				   //Exit Stage Right!
+	//Exit Stage Right!
 	return 0;
 }
 
-void MapDraw(int x, int y)
+void DrawMap(short x, short y, short Spot_Mve, char type) // Draws Tic Tac Toe Map
 {
+	char Trk_Mves[9]; // Graph of the points
+	char Map[x][y];
+	Trk_Mves[Spot_Mve] = type; // Repeated code, points at spot 'x' or 'o' was placed at
+
 	for (int i = 0; i < y; i++)
 	{
 		for (int i = 0; i <x; i++)
 		{
-
+			Map[x][y] = 'x';//(wicked)This is only to be used for desiging make emtpy later
+			cout << Map[x][y];
 		}
 		cout << endl;
 	}
 }
-void GameLogic(int Turn) // Logic of Game/Rules/ (Decides when you win or lose!)
+void GameLogic(short Turn, short x, short y) // Logic of Game/Rules/ (Decides when you win or lose!)
 {
 	char Trk_Mves[9];
 	short Spot_Mve; // The spot in which the player decided to pick
@@ -119,8 +122,10 @@ void GameLogic(int Turn) // Logic of Game/Rules/ (Decides when you win or lose!)
 
 	Trk_Mves[Spot_Mve] = type; // Puts the shape on the point
 
+	DrawMap(x, y, Spot_Mve, type); // Draws the spot the x's and o's will go
+
 	for (int i = 0; i < 10; i++) { // Checks if the Player Wins
-		if (Trk_Mves[i] == )
+		if (Trk_Mves[i] == 0) {}//didn't finish line o put random(wicked) finish delete '0'
 
 	}
 
