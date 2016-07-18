@@ -100,10 +100,12 @@ void DrawMap(short x, short y, short Spot_Mve, char type) // Draws Tic Tac Toe M
 
 	for (int i = 0; i < y; i++)
 	{
-		for (int i = 0; i <x; i++)
+		for (int j = 0; j <x; j++)
 		{
 			Map[x][y] = 'x';//(wicked)This is only to be used for desiging make emtpy later
-			cout << Map[x][y];
+			if (i % 2 != 0) { Map[x][y] = '|'; }
+			if (j % 2 != 0) { Map[x][y] = '-'; }
+			cout << Map[x][y] << " ";
 		}
 		cout << endl;
 	}
