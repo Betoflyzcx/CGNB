@@ -53,38 +53,38 @@ int main(int argc, char** argv) {
 
 
 	//Output
-	switch (Turn) {
-		while (Turn < 3) {
-	case 1: // Player 1's Turn
-		cout << "It's Player 1's Turn\t";
+	while (Turn < 3) {
+		switch (Turn) {
+		case 1: // Player 1's Turn
+			cout << "It's Player 1's Turn\t";
 
 
-		GameLogic(Turn, x, y);
-		Turn += 1; // Go's To player 2's Turn 
-		break;
-
-	case 2: // Player 2's Turn
-		cout << "It's Player 2's Turn";
-		switch (P_or_A)
-		{
-
-		case 1: // Player vs Player Logic    
-			cout << "It's Player 2's Turn";
 			GameLogic(Turn, x, y);
+			Turn += 1; // Go's To player 2's Turn 
+			break;
+
+		case 2: // Player 2's Turn
+			cout << "It's Player 2's Turn";
+			switch (P_or_A)
+			{
+
+			case 1: // Player vs Player Logic    
+				cout << "It's Player 2's Turn";
+				GameLogic(Turn, x, y);
 
 
 
-		case 2: // Player plays an 'AI' 
-			AI();
-		default:
-			cout << "You never entered a valid entry for which you wish to play";
-			cout << "'Player' or 'AI' \t";
-			cin >> P_or_A;
+			case 2: // Player plays an 'AI' 
+				AI();
+			default:
+				cout << "You never entered a valid entry for which you wish to play";
+				cout << "'Player' or 'AI' \t";
+				cin >> P_or_A;
 
-		}
+			}
 
-		Turn -= 1; // Go's Back to Player 1's Turn
-		break;
+			Turn -= 1; // Go's Back to Player 1's Turn
+			break;
 
 
 		}
@@ -107,8 +107,6 @@ void DrawMap(short x, short y, short Spot_Mve, char type) // Draws Tic Tac Toe M
 	{
 		for (int j = 0; j <x; j++)
 		{
-			Trk_Mves[j] = 'x';//This will override any char's passed through (DELETE)
-			Trk_Mves[j] = ' ';
 			if (j % 2 != 0) { Trk_Mves[j] = '|'; }
 			if (j % 2 == 0) { if (i % 2 == 0) { Trk_Mves[j] = '_'; } }
 			cout << Trk_Mves[j] << " ";
@@ -138,10 +136,14 @@ void GameLogic(short Turn, short x, short y) // Logic of Game/Rules/ (Decides wh
 
 	DrawMap(x, y, Spot_Mve, type); // Draws the spot the x's and o's will go
 
+	string Chk;
 	int c_wins1 = 0;
 	int c_wins2 = 0;
 	int ties = 0;
-	if (Gme_Anlyze(Spot_Mve, type) == "P1")
+
+	Chk = Gme_Anlyze(Spot_Mve, type);
+
+	if (Chk == "P1")
 	{
 		c_wins1 += 1;
 		//[find way to display in right side always showing while playing!]
@@ -149,7 +151,7 @@ void GameLogic(short Turn, short x, short y) // Logic of Game/Rules/ (Decides wh
 		cout << "\n\n\t Player 2 has:\t" << c_wins2 << " wins";
 		cout << "\n\n\t Amount of ties:\t" << ties << "\n\n\n";
 	}
-	if (Gme_Anlyze(Spot_Mve, type) == "P2")  // while playing!]
+	if (Chk == "P2")  // while playing!]
 	{
 		c_wins2 += 1;
 		//[find way to display in right side always showing while playing!]
@@ -157,7 +159,7 @@ void GameLogic(short Turn, short x, short y) // Logic of Game/Rules/ (Decides wh
 		cout << "\n\n\t Player 2 has:\t" << c_wins2 << " wins";
 		cout << "\n\n\t Amount of ties:\t" << ties << "\n\n\n";
 	}
-	if (Gme_Anlyze(Spot_Mve, type) == "tie")
+	if (Chk == "tie")
 	{
 		ties += 1;
 		//[find way to display in right side always showing while playing!]
