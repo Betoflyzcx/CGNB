@@ -29,6 +29,8 @@ void GameLogic(short Turn, short x, short y);
 
 string Chk_Spot(short x);
 
+bool Gme_Anlyze(short Spot_Mve, char type);
+
 // Execution Begins Here!
 int main(int argc, char** argv) {
 	//Declare variables
@@ -126,10 +128,9 @@ void GameLogic(short Turn, short x, short y) // Logic of Game/Rules/ (Decides wh
 
 	DrawMap(x, y, Spot_Mve, type); // Draws the spot the x's and o's will go
 
-	for (int i = 0; i < 10; i++) { // Checks if the Player Wins
-		if (Trk_Mves[i] == 0) {}//didn't finish line o put random(wicked) finish delete '0'
+	if (Gme_Anlyze(Spot_Mve, type));
 
-	}
+
 
 }
 
@@ -156,4 +157,137 @@ string Chk_Spot(short x)
 		return "True";
 		Ctr++;
 	}
+
+}
+
+bool Gme_Anlyze(short Spot_Mve, char type) {
+	char Trk_Mves[9];
+	Trk_Mves[Spot_Mve] = type;
+
+	short n1, n2, n3, n4, n5, n6, n7, n8; // Player 1's 'O's 
+	short m1, m2, m3, m4, m5, m6, m7, m8; // Player 2's 'X's
+
+										  // 1st Row check   (Horizontal Check)
+	for (int i = 1; i < 4; i++) { // Checks if the Player Wins
+		if (Trk_Mves[i] == 'O') //If 'O' happens 3 times in a row P1 wins
+		{
+			n1 += 1; // O's Count
+			m1 = 0; // X's Count
+		}
+		if (Trk_Mves[i] == 'X') //If 'X' happens 3 times in a row P1 wins
+		{
+			n1 = 0; // O's Count
+			m1 += 1; // X's Count
+		}
+	}
+	// 2nd Row Check   (Horizontal Check)
+	for (int i = 4; i < 7; i++) { // Checks if the Player Wins
+		if (Trk_Mves[i] == 'O') //If 'O' happens 3 times in a row P1 wins
+		{
+			n2 += 1; // O's Count
+			m2 = 0; // X's Count
+		}
+		if (Trk_Mves[i] == 'X') //If 'X' happens 3 times in a row P1 wins
+		{
+			n2 = 0; // O's Count
+			m2 += 1; // X's Count
+		}
+	}
+	// 3rd Row Check   (Horizontal Check)
+	for (int i = 1; i < 4; i++) { // Checks if the Player Wins
+		if (Trk_Mves[i] == 'O') //If 'O' happens 3 times in a row P1 wins
+		{
+			n3 += 1; // O's Count
+			m3 = 0; // X's Count
+		}
+		if (Trk_Mves[i] == 'X') //If 'X' happens 3 times in a row P1 wins
+		{
+			n3 = 0; // O's Count
+			m3 += 1; // X's Count
+		}
+	}
+
+
+
+	// 1st Row    (Vertical Check)
+	for (int i = 1; i < 8; i += 3) { // Checks if the Player Wins
+		if (Trk_Mves[i] == 'O') //If 'O' happens 3 times in a row P1 wins
+		{
+			n4 += 1; // O's Count
+			m4 = 0; // X's Count
+		}
+		if (Trk_Mves[i] == 'X') //If 'X' happens 3 times in a row P1 wins
+		{
+			n4 = 0; // O's Count
+			m4 += 1; // X's Count
+		}
+	}
+	// 2nd Row    (Vertical Check)
+	for (int i = 2; i < 9; i += 3) { // Checks if the Player Wins
+		if (Trk_Mves[i] == 'O') //If 'O' happens 3 times in a row P1 wins
+		{
+			n5 += 1; // O's Count
+			m5 = 0; // X's Count
+		}
+		if (Trk_Mves[i] == 'X') //If 'X' happens 3 times in a row P1 wins
+		{
+			n5 = 0; // O's Count
+			m5 += 1; // X's Count
+		}
+	}
+	// 3rd Row    (Vertical Check)
+	for (int i = 3; i < 10; i += 3) { // Checks if the Player Wins
+		if (Trk_Mves[i] == 'O') //If 'O' happens 3 times in a row P1 wins
+		{
+			n6 += 1; // O's Count
+			m6 = 0; // X's Count
+		}
+		if (Trk_Mves[i] == 'X') //If 'X' happens 3 times in a row P1 wins
+		{
+			n6 = 0; // O's Count
+			m6 += 1; // X's Count
+		}
+	}
+
+
+
+	// 1st Row    (Side-ways -X-  Check)
+	for (int i = 1; i < 10; i += 4) { // Checks if the Player Wins
+		if (Trk_Mves[i] == 'O') //If 'O' happens 3 times in a row P1 wins
+		{
+			n7 += 1; // O's Count
+			m7 = 0; // X's Count
+		}
+		if (Trk_Mves[i] == 'X') //If 'X' happens 3 times in a row P1 wins
+		{
+			n7 = 0; // O's Count
+			m7 += 1; // X's Count
+		}
+	}
+	// 2nd Row    (Side-ways -X-  Check)
+	for (int i = 3; i < 8; i += 2) { // Checks if the Player Wins
+		if (Trk_Mves[i] == 'O') //If 'O' happens 3 times in a row P1 wins
+		{
+			n8 += 1; // O's Count
+			m8 = 0; // X's Count
+		}
+		if (Trk_Mves[i] == 'X') //If 'X' happens 3 times in a row P1 wins
+		{
+			n8 = 0; // O's Count
+			m8 += 1; // X's Count
+		}
+	}
+
+	if (n1 == 3) || (n2 == 3) || (n3 == 3) || (n4 == 3) || (n5 == 3) || (n6 == 3) || (n7 == 3) || (n8 == 3)
+	{
+		return true;
+	}
+
+	if (m1 == 3) || (m2 == 3) || (m3 == 3) || (m4 == 3) || (m5 == 3) || (m6 == 3) || (m7 == 3) || (m8 == 3)
+	{
+		return true;
+	}
+	else return false;
+
+
 }
