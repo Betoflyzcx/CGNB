@@ -26,12 +26,19 @@ void MapDraw(int x,int y);
 
 // Execution Begins Here!
 int main(int argc, char** argv) {
-	//Declare variables
+   //Declare variables
+    int x;
+    int y;
+    cin >>x; 
+    cin >>y;
+    
+    
+    MapDraw(x,y); //Maps Length and Width
+    
 
 
 
-
-	//Exit Stage Right!
+    //Exit Stage Right!
     return 0;
 }
 
