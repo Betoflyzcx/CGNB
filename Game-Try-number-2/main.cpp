@@ -8,6 +8,7 @@
 //System Libraries
 #include "stdafx.h"
 #include <iostream> //Input/Output Library
+#include <string>
 using namespace std; //Namespace of the System Libraries
 					 //User Libraries
 
@@ -20,7 +21,7 @@ using namespace std; //Namespace of the System Libraries
 					 //Function Prototypes
 
 void CheckTurn(int turn);
-void DrawMap(char P_char, char L_input);
+void DrawMap(char p_char, int uInput);
 
 
 //Execution Begins Here!
@@ -28,17 +29,28 @@ int main(int argc, char** argv) {
 	char Board[9] = { ' ',' ',' ',' ',' ',' ',' ',' ',' ' };
 	bool Used[9];
 	char type;
-	char Oppnnt;
+	string Oppnnt;
 	char L_input;
 	short turn = 1;
+	bool Chk = false;
 
 	cout << "Enter whether you wish to play against an AI or another PLAYER";
-	cout << "Enter:\t 1 For Player \t Enter:\t For AI";
+	cout << "Enter:\t 1 For Player \t Enter:\t For AI ";
 	cin >> Oppnnt;
-	while (!Oppnnt == '1' || !Oppnnt == '2')
+	while (Chk == false)
 	{
-		cout << "Try Again Enter:\t 1 For Player \t Enter:\t 2 For AI"; // Keeps looping until Valid is entered!
-		cin >> Oppnnt;
+		if (Oppnnt != "2")
+		{
+			if (Oppnnt != "1")
+			{
+				cout << "Try Again Enter:\t 1 For Player \t Enter:\t 2 For AI "; // Keeps looping until Valid is entered!
+				cin >> Oppnnt;
+			}
+		}
+		if (Oppnnt == "1" || Oppnnt == "2")
+		{
+			Chk = true;
+		}
 	}
 	switch (turn)
 	{
@@ -70,10 +82,9 @@ int main(int argc, char** argv) {
 		}
 		if (Used[L_input] == false) // If the point isn't used.... marks it used
 		{
-			Used[L_input] == true;
+			Used[L_input] = true;
 		}
 		DrawMap(type, L_input);
-
 
 
 
@@ -83,15 +94,21 @@ int main(int argc, char** argv) {
 	//Exit Stage Right!
 	return 0;
 }
-void DrawMap(char P_char, char L_input)
+void DrawMap(char p_char, int uInput)//Requires a return of player character and the position he wants to place it
 {
-	for (int i = 0; i < i; i++)
+	int MapSize = 9;//Map y cordinate
+	char Map[9];//Map for drawing tic tac toe
+	for (int i = 0; i < 9; i++)
 	{
-		for (int j = 0; j <; j++)
-		{
-			cout << "x ";
-		}
-		cout << endl;
+		Map[i] = ' ';
+	}
+
+	for (int i = 0; i < MapSize; i++)
+	{
+		if (i % 3 == 0 && i != 0) { cout << endl; }//Add line skips when at 3
+
+		Map[uInput] = p_char;//assign the player character(x or o) to the map
+		cout << Map[i] << " ";//Draw the whole Map
 	}
 }
 void CheckTurn(int turn)
