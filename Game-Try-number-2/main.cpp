@@ -59,6 +59,10 @@ int main(int argc, char** argv) {
 		cout << "It's Player 1's Turn \n\n\n";
 		cout << "Choose a location: \t 1 2 3 \n \t 4 5 6 \n \t 7 8 9 \n \t";
 		cin >> L_input;
+		while (isdigit(L_input) == false)
+		{
+
+		}
 		short Chk;
 		for (int i = 1; i < 10; i++) // Loops through to see if a valid number was put in 
 		{
