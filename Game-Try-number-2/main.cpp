@@ -21,7 +21,7 @@ using namespace std; //Namespace of the System Libraries
 					 //Function Prototypes
 
 void CheckTurn(int turn);
-void DrawMap(char p_char, char uInput);
+void DrawMap(char p_char, char Input);
 void Gme_Stat(char L_input, char type);
 
 
@@ -90,10 +90,11 @@ int main(int argc, char** argv) {
 	//Exit Stage Right!
 	return 0;
 }
-void DrawMap(char p_char, char uInput)//Requires a return of player character and the position he wants to place it
+void DrawMap(char p_char, char Input)//Requires a return of player character and the position he wants to place it
 {
 	int MapSize = 9;//Map y cordinate
 	char Map[9];//Map for drawing tic tac toe
+	int uInput = Input - '0';
 	for (int i = 0; i < 9; i++)
 	{
 		Map[i] = ' ';
@@ -106,6 +107,8 @@ void DrawMap(char p_char, char uInput)//Requires a return of player character an
 		Map[uInput] = p_char;//assign the player character(x or o) to the map
 		cout << Map[i] << " ";//Draw the whole Map
 	}
+	cout << endl;
+
 }
 void CheckTurn(int turn)
 {
