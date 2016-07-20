@@ -9,22 +9,21 @@
 #include "stdafx.h"
 #include <iostream> //Input/Output Library
 #include <string>
+#include <vector>
 using namespace std; //Namespace of the System Libraries
 					 //User Libraries
 
 
 
 					 //Global Constants
-char Map[9];//Map for drawing tic tac toe
-int MapSize = 9;//Map y cordinate
 
 
-				//Function Prototypes
+					 //Function Prototypes
 
 void CheckTurn(int turn);
-void DrawMap(char p_char, char Input);
+void DrawMap(char p_char, char Input, vector<char> &Map, int &MapSize);
 void Gme_Stat(char L_input, char type);
-void ResetMap();
+void ResetMap(vector<char> &Map, int &MapSize);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -35,7 +34,10 @@ int main(int argc, char** argv) {
 	char L_input;
 	short turn = 1;
 	bool Chk = false;
-	ResetMap();
+	int MapSize = 9;//Map y cordinate
+	vector<char> Map(MapSize);//Map for drawing tic tac toe
+
+	ResetMap(Map, MapSize);
 
 	cout << "Enter whether you wish to play against an AI or another PLAYER";
 	cout << "Enter:\t 1 For Player \t Enter:\t For AI ";
@@ -81,7 +83,7 @@ int main(int argc, char** argv) {
 			{
 				Used[L_input] = true;
 			}
-			DrawMap(type, L_input);
+			DrawMap(type, L_input, Map, MapSize);
 
 
 
@@ -92,7 +94,7 @@ int main(int argc, char** argv) {
 	//Exit Stage Right!
 	return 0;
 }
-void DrawMap(char p_char, char Input)//Requires a return of player character and the position he wants to place it
+void DrawMap(char p_char, char Input, vector<char> &Map, int &MapSize)//Requires a return of player character and the position he wants to place it
 {
 	int uInput = Input - '0'; uInput -= 1;
 
@@ -117,7 +119,7 @@ void Game_Stat(char L_input, char type) // Checks if theres a win, tie, or loss
 
 
 }
-void ResetMap()
+void ResetMap(vector<char> &Map, int &MapSize)
 {
 	for (int i = 0; i < MapSize; i++)
 	{
