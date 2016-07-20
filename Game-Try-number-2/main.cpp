@@ -24,6 +24,8 @@ void CheckTurn(int turn);
 void DrawMap(char p_char, char Input, vector<char> &Map, int &MapSize);
 void Gme_Stat(char L_input, char type);
 void ResetMap(vector<char> &Map, int &MapSize);
+bool CheckWin(char player, vector<char> &Map);
+string GetWinner(vector<char> &Map);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -36,9 +38,8 @@ int main(int argc, char** argv) {
 	bool Chk = false;
 	int MapSize = 9;//Map y cordinate
 	vector<char> Map(MapSize);//Map for drawing tic tac toe
-
 	ResetMap(Map, MapSize);
-
+	CheckWin('O', Map);
 	cout << "Enter whether you wish to play against an AI or another PLAYER";
 	cout << "Enter:\t 1 For Player \t Enter:\t For AI ";
 	cin >> Oppnnt;
@@ -87,7 +88,10 @@ int main(int argc, char** argv) {
 
 
 
-
+		}
+		if (GetWinner(Map) != "None")//There is a winner
+		{
+			cout << endl << GetWinner(Map) << " Wins!" << endl;//Write the winner to screen
 		}
 	}
 
@@ -96,7 +100,7 @@ int main(int argc, char** argv) {
 }
 void DrawMap(char p_char, char Input, vector<char> &Map, int &MapSize)//Requires a return of player character and the position he wants to place it
 {
-	int uInput = Input - '0'; uInput -= 1;
+	int uInput = Input - '0'; uInput -= 1;//Convert char to int
 
 	for (int i = 0; i < MapSize; i++)
 	{
@@ -121,8 +125,32 @@ void Game_Stat(char L_input, char type) // Checks if theres a win, tie, or loss
 }
 void ResetMap(vector<char> &Map, int &MapSize)
 {
-	for (int i = 0; i < MapSize; i++)
+	for (int i = 0; i < MapSize; i++)//Reset the map to empty spaces
 	{
 		Map[i] = ' ';
 	}
+}
+bool CheckWin(char player, vector<char> &Map)//Checks for a winner
+{
+	string Win = "";//The winner is stored here
+	vector<string> map(9);//a temperarely stored map used for conversion of char to string
+	for (int i = 0; i < 9; i++)//loop the map length
+	{
+		map[i].push_back(Map[i]);//set the string map equal to the char map 
+	}
+	Win.push_back(player); Win.push_back(player); Win.push_back(player);//Add 3 chars of itself so that it can compare to 3 places at once
+	return ((map[0] + map[1] + map[2] == Win)	//Row 1
+		|| (map[3] + map[4] + map[5] == Win)	//Row 2
+		|| (map[6] + map[7] + map[8] == Win)	//Row 3
+		|| (map[0] + map[3] + map[6] == Win)	//Column 1
+		|| (map[1] + map[4] + map[7] == Win)	//Colomn 2
+		|| (map[2] + map[5] + map[8] == Win)	//Column 3
+		|| (map[0] + map[4] + map[8] == Win)	//Diagnol 1
+		|| (map[2] + map[4] + map[6] == Win));	//Diagnol 2
+}
+string GetWinner(vector<char> &Map)//Grab a winner and return string 
+{
+	if (CheckWin('O', Map))	return "Player 1";//if a winner is x return player 1
+	if (CheckWin('X', Map)) return "Player 2";//if winner is o return player 2
+	else return "None";//if there is no winner return non
 }
