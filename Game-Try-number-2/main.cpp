@@ -10,6 +10,7 @@
 #include <iostream> //Input/Output Library
 #include <string>
 #include <vector>
+#include <ctime>
 using namespace std; //Namespace of the System Libraries
 					 //User Libraries
 
@@ -33,6 +34,7 @@ int main(int argc, char** argv) {
 	bool Used[9];
 	char type;
 	string Oppnnt;
+	char Diffclty;
 	char L_input;
 	short turn = 1;
 	bool Chk = false;
@@ -56,6 +58,29 @@ int main(int argc, char** argv) {
 		if (Oppnnt == "1" || Oppnnt == "2")
 		{
 			Chk = true;
+		}
+	}
+	if (Oppnnt == "2")
+	{
+		bool Chk_D = false;
+		cout << "Enter the Difficulty you wish to face: \t Enter 1 for easy \t Enter 2 for Intermediate \n \t";
+		cout << "Enter 3 for impossible (Warning Impossible cannot be beaten)";
+		cin >> Diffclty;
+		while (Chk_D == false)
+		{
+			if (Diffclty != '3')
+			{
+				if (Diffclty != '2')
+				{
+					if (Diffclty != '1') // Keeps looping until Valid is entered!
+						cin >> Oppnnt;
+					cout << "Try Again Enter:\t 1 For easy \t Enter:\t 2 For intermediate \t Enter:\t 3 for impossible ";
+				}
+			}
+			if (Diffclty == '1' || Diffclty == '2' || Diffclty == '3')
+			{
+				Chk_D = true;
+			}
 		}
 	}
 	while (true)
@@ -86,9 +111,92 @@ int main(int argc, char** argv) {
 			}
 			DrawMap(type, L_input, Map, MapSize);
 
+		case 2: //  Player 2
+			if (Oppnnt == "1") // checks if the user is facing another player or an AI
+			{
+				type = 'X';
+				cout << "It's Player 1's Turn \n\n\n";
+				cout << "Choose a location: \t 1 2 3 \n \t 4 5 6 \n \t 7 8 9 \n \t";
+				cin >> L_input;
+				while (isdigit(L_input) == false)
+				{
+					cout << "Enter a valid number 1-9";
+					cin >> L_input;
+				}
 
 
+				while (Used[L_input] == true) // Checks if someone has already used the point
+				{
+					cout << "It appears someone has already chosen that spot..\t choose another spot\t";
+					cout << "1 2 3 \n \t 4 5 6 \n \t 7 8 9 \n \t:";
+					cin >> L_input;
+				}
+				if (Used[L_input] == false) // If the point isn't used.... marks it used
+				{
+					Used[L_input] = true;
+				}
+				DrawMap(type, L_input, Map, MapSize);
+
+			}
+			if (Oppnnt == "2")
+			{
+				short Dif = Diffclty - '0';
+				srand(time(0));
+				switch (Dif)
+				{
+
+				case 1:
+					L_input = (rand() % 8 + 1);
+
+					while (Used[L_input] == true) // Checks if someone has already used the point
+					{
+						L_input = (rand() % 8 + 1);
+					}
+					if (Used[L_input] == false) // If the point isn't used.... marks it used
+					{
+						Used[L_input] = true;
+					}
+					DrawMap(type, L_input, Map, MapSize);
+					break;
+
+				case 2:
+
+					while (Used[L_input] == true)
+					{
+						if (L_input == '1' || L_input == '3' || L_input == '7' || L_input == '9')
+						{
+							L_input = '5';
+						}
+						else
+						{
+							L_input = (rand() % 8 + 1);
+						}
+					}
+					if (Used[L_input] == false)
+					{
+						Used[L_input] = true;
+					}
+					DrawMap(type, L_input, Map, MapSize);
+					break;
+
+				case 3:
+					short Input = L_input - '0';
+
+					if (Input == 1 || Input == 3 || Input == 7 || Input == 9)
+					{
+						L_input = '5';
+					}
+
+					if (Input == 5)
+					{
+						L_input = '1';
+					}
+
+
+				}
+			}
 		}
+
 		if (GetWinner(Map) != "None")//There is a winner
 		{
 			cout << endl << GetWinner(Map) << " Wins!" << endl;//Write the winner to screen
