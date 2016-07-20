@@ -21,7 +21,7 @@ using namespace std; //Namespace of the System Libraries
 					 //Function Prototypes
 
 void CheckTurn(int turn);
-void DrawMap(char p_char, int uInput);
+void DrawMap(char p_char, char uInput);
 
 
 //Execution Begins Here!
@@ -61,23 +61,11 @@ int main(int argc, char** argv) {
 		cin >> L_input;
 		while (isdigit(L_input) == false)
 		{
-
+			cout << "Enter a valid number 1-9";
+			cin >> L_input;
 		}
-		short Chk;
-		for (int i = 1; i < 10; i++) // Loops through to see if a valid number was put in 
-		{
-			if (L_input == i)
-			{
-				Chk += 1;    // if a valid number was put in then the while loop is skipped 
-			}
-			i = 1; // Makes it loop forever until a valid answer is entered
-			while (Chk == 0)
-			{
-				cout << "Enter a valid number.. (1-9) ";
-				cin >> L_input;
-				Chk++;
-			}
-		} // if have erros try (Used(L_input == true)) <- in the inside like that 
+
+
 		while (Used[L_input] == true) // Checks if someone has already used the point
 		{
 			cout << "It appears someone has already chosen that spot..\t choose another spot\t";
@@ -98,7 +86,7 @@ int main(int argc, char** argv) {
 	//Exit Stage Right!
 	return 0;
 }
-void DrawMap(char p_char, int uInput)//Requires a return of player character and the position he wants to place it
+void DrawMap(char p_char, char uInput)//Requires a return of player character and the position he wants to place it
 {
 	int MapSize = 9;//Map y cordinate
 	char Map[9];//Map for drawing tic tac toe
