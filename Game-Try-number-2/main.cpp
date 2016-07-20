@@ -22,6 +22,7 @@ using namespace std; //Namespace of the System Libraries
 
 void CheckTurn(int turn);
 void DrawMap(char p_char, char uInput);
+void Gme_Stat(char L_input, char type);
 
 
 //Execution Begins Here!
@@ -52,35 +53,38 @@ int main(int argc, char** argv) {
 			Chk = true;
 		}
 	}
-	switch (turn)
+	while (true)
 	{
-	case 1: // Player 1's Turn
-		type = 'O';
-		cout << "It's Player 1's Turn \n\n\n";
-		cout << "Choose a location: \t 1 2 3 \n \t 4 5 6 \n \t 7 8 9 \n \t";
-		cin >> L_input;
-		while (isdigit(L_input) == false)
+		switch (turn)
 		{
-			cout << "Enter a valid number 1-9";
+		case 1: // Player 1's Turn
+			type = 'O';
+			cout << "It's Player 1's Turn \n\n\n";
+			cout << "Choose a location: \t 1 2 3 \n \t 4 5 6 \n \t 7 8 9 \n \t";
 			cin >> L_input;
+			while (isdigit(L_input) == false)
+			{
+				cout << "Enter a valid number 1-9";
+				cin >> L_input;
+			}
+
+
+			while (Used[L_input] == true) // Checks if someone has already used the point
+			{
+				cout << "It appears someone has already chosen that spot..\t choose another spot\t";
+				cout << "1 2 3 \n \t 4 5 6 \n \t 7 8 9 \n \t:";
+				cin >> L_input;
+			}
+			if (Used[L_input] == false) // If the point isn't used.... marks it used
+			{
+				Used[L_input] = true;
+			}
+			DrawMap(type, L_input);
+
+
+
+
 		}
-
-
-		while (Used[L_input] == true) // Checks if someone has already used the point
-		{
-			cout << "It appears someone has already chosen that spot..\t choose another spot\t";
-			cout << "1 2 3 \n \t 4 5 6 \n \t 7 8 9 \n \t:";
-			cin >> L_input;
-		}
-		if (Used[L_input] == false) // If the point isn't used.... marks it used
-		{
-			Used[L_input] = true;
-		}
-		DrawMap(type, L_input);
-
-
-
-
 	}
 
 	//Exit Stage Right!
@@ -106,4 +110,11 @@ void DrawMap(char p_char, char uInput)//Requires a return of player character an
 void CheckTurn(int turn)
 {
 	cout << "Player " << turn << "'s turn" << endl; //write the current players turn
+}
+
+void Game_Stat(char L_input, char type) // Checks if theres a win, tie, or loss
+{
+	int Input = L_input - '0';
+
+
 }
