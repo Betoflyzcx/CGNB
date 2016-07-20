@@ -15,15 +15,16 @@ using namespace std; //Namespace of the System Libraries
 
 
 					 //Global Constants
+char Map[9];//Map for drawing tic tac toe
+int MapSize = 9;//Map y cordinate
 
 
-
-					 //Function Prototypes
+				//Function Prototypes
 
 void CheckTurn(int turn);
 void DrawMap(char p_char, char Input);
 void Gme_Stat(char L_input, char type);
-
+void ResetMap();
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -34,6 +35,7 @@ int main(int argc, char** argv) {
 	char L_input;
 	short turn = 1;
 	bool Chk = false;
+	ResetMap();
 
 	cout << "Enter whether you wish to play against an AI or another PLAYER";
 	cout << "Enter:\t 1 For Player \t Enter:\t For AI ";
@@ -92,13 +94,7 @@ int main(int argc, char** argv) {
 }
 void DrawMap(char p_char, char Input)//Requires a return of player character and the position he wants to place it
 {
-	int MapSize = 9;//Map y cordinate
-	char Map[9];//Map for drawing tic tac toe
-	int uInput = Input - '0';
-	for (int i = 0; i < 9; i++)
-	{
-		Map[i] = ' ';
-	}
+	int uInput = Input - '0'; uInput -= 1;
 
 	for (int i = 0; i < MapSize; i++)
 	{
@@ -120,4 +116,11 @@ void Game_Stat(char L_input, char type) // Checks if theres a win, tie, or loss
 	int Input = L_input - '0';
 
 
+}
+void ResetMap()
+{
+	for (int i = 0; i < MapSize; i++)
+	{
+		Map[i] = ' ';
+	}
 }
